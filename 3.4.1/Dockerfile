@@ -1,6 +1,5 @@
 FROM cypress/base:10
 
-ARG FIREFOX_VERSION=57.0.2
 ARG CYPRESS_VERSION="3.4.1"
 
 USER root
@@ -20,12 +19,6 @@ RUN \
 # https://github.com/SeleniumHQ/docker-selenium/issues/87
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null \
     CI=1
-
-# install Firefox browser
-RUN wget --no-verbose -O /tmp/firefox.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 \
-  && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
-  && rm /tmp/firefox.tar.bz2 \
-  && ln -fs /opt/firefox/firefox /usr/bin/firefox
 
 WORKDIR /e2e
 
