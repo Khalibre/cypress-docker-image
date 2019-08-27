@@ -1,8 +1,13 @@
 FROM cypress/base:10
 
 ARG CYPRESS_VERSION="3.4.1"
+ARG DOCKER_USER_ID=1001
+ARG DOCKER_GROUP_ID=1001
 
 USER root
+
+RUN usermod -u ${DOCKER_USER_ID} node
+RUN groupmod -g ${DOCKER_GROUP_ID} node
 
 RUN node --version
 RUN echo "force new chrome here"
